@@ -16,12 +16,9 @@
       {% else %}
         <i class="fa fa-info fa-x3"></i>
       {% endif %}
-
-
-      
-       	
-       {% if data.global.alertTitle | length > 1 %}
-       	<strong>{{data.global.alertTitle}}</strong>
+             	
+      {% if data.global.alertTitle | length > 1 %}
+       <strong>{{data.global.alertTitle}}</strong>
        {% else%}
        	<strong>{{ data.global._alerts[0].title}}</strong> - {{ data.global._alerts[0].alertContent}}
        {% endif %}
@@ -34,7 +31,7 @@
 
       <div class="collapse" id="collapseExample">
         {% for item in data.global._alerts %}
-            <div class="card card-body">
+            <div class="card card-body" style="width: 18rem;">
               {{item.upcoming}}
                
                 <div class="usa-media_block-body">
