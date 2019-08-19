@@ -1,0 +1,55 @@
+
+{% set selectedAlertLevel = data.global.alertDefaults[data.global.alertLevel -1] %}
+<style>
+.info-level{{data.global.alertLevel}} {
+	background-color:  {{selectedAlertLevel.alertBgColor or '#6DC6E8'}};
+  color: {{selectedAlertLevel.alertFontColor}};
+}
+</style>
+{% if data.global.alertDisplay %}
+    <div class="alert info-alert info-level{{data.global.alertLevel | json }}" role="alert" data-bgcolor="{{selectedAlertLevel.alertBgColor}}">
+    <div class="container">
+      {% if data.global.alertLevel == 1 %}
+        <i class="fa fa-exclamation-triangle fa-x3"></i>
+      {% elseif data.global.alertLevel == 2 %}
+        <i class="fa fa-cloud fa-x3"></i>
+      {% else %}
+        <i class="fa fa-info fa-x3"></i>
+      {% endif %}
+
+
+      
+       	
+       {% if data.global.alertTitle | length > 1 %}
+       	<strong>{{data.global.alertTitle}}</strong>
+       {% else%}
+       	<strong>{{ data.global._alerts[0].title}}</strong> - {{ data.global._alerts[0].alertContent}}
+       {% endif %}
+      
+      
+      {% if data.global._alerts | length %}
+      <button type="button" class="close" data-toggle="collapse" aria-expanded="false" href="#collapseExample"  aria-label="Close" aria-controls="collapseExample">
+        <span aria-hidden="true">^</span>
+      </button>
+
+      <div class="collapse" id="collapseExample">
+        {% for item in data.global._alerts %}
+            <div class="card card-body">
+              {{item.upcoming}}
+               
+                <div class="usa-media_block-body">
+                  <p>
+                    <strong>{{item.alertTitle}}</strong>
+                    <br>
+                    {{ item.alertcontent }}
+                  </p>
+                </div>
+            </div>
+            {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% endif %}
+
