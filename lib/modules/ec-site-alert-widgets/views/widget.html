@@ -1,48 +1,56 @@
-
 {% set selectedAlertLevel = data.global.alertDefaults[data.global.alertLevel -1] %}
 <style>
-.info-level{{data.global.alertLevel}} {
+.info-alert {
 	background-color:  {{selectedAlertLevel.alertBgColor or '#6DC6E8'}};
   color: {{selectedAlertLevel.alertFontColor}};
 }
+
+.info-alert strong {
+  color: {{selectedAlertLevel.alertFontColor}};
+}
+
+.info-alert .card {
+  color: #000;
+}
 </style>
 {% if data.global.alertDisplay %}
-    <div class="alert info-alert info-level{{data.global.alertLevel | json }}" role="alert" data-bgcolor="{{selectedAlertLevel.alertBgColor}}">
-    <div class="container">
-      {% if data.global.alertLevel == 1 %}
-        <i class="fa fa-exclamation-triangle fa-x3"></i>
-      {% elseif data.global.alertLevel == 2 %}
-        <i class="fa fa-cloud fa-x3"></i>
+    <div class="alert info-alert" role="alert" data-bgcolor="{{selectedAlertLevel.alertBgColor}}">
+    <div class="alert-container container">
+      {% if data.global.alertIcon %}
+        <i class="fa data.global.alertIcon fa-x3"></i>
       {% else %}
-        <i class="fa fa-info fa-x3"></i>
+        <i class="fa fa-exclamation fa-x3"></i>
       {% endif %}
              	
       {% if data.global.alertTitle | length > 1 %}
-       <strong>{{data.global.alertTitle}}</strong>
+       <strong>{{data.global.alertTitle}}</strong> - {{ data.global.alertDescription | truncate(150)}}
        {% else%}
        	<strong>{{ data.global._alerts[0].title}}</strong> - {{ data.global._alerts[0].alertContent}}
        {% endif %}
       
       
       {% if data.global._alerts | length %}
-      <button type="button" class="close" data-toggle="collapse" aria-expanded="false" href="#collapseExample"  aria-label="Close" aria-controls="collapseExample">
-        <span aria-hidden="true">^</span>
+      <button id="alertButton" type="button" class="close" data-toggle="collapse" aria-expanded="false" href="#collapseExample"  aria-label="Close" aria-controls="collapseExample">
+        <span aria-hidden="true"><i class="fa fa-angle-down"></i></span>
       </button>
 
       <div class="collapse" id="collapseExample">
-        {% for item in data.global._alerts %}
-            <div class="card card-body" style="width: 18rem;">
-              {{item.upcoming}}
-               
-                <div class="usa-media_block-body">
-                  <p>
-                    <strong>{{item.alertTitle}}</strong>
-                    <br>
-                    {{ item.alertcontent }}
-                  </p>
-                </div>
+        <div class="container-fluid">
+           <div class="row">
+          {% for item in data.global._alerts %}
+      
+    <div class="col-sm">
+      
+ 
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{% if item.alertIcon%} <i class="{{ item.alertIcon}} fa-x3"></i> {% endif %}{{item.title}}</h5>
+                <p class="card-text">{{ item.alertContent}}</p>
+              </div>
             </div>
+             </div>
             {% endfor %}
+          </div>
       </div>
       {% endif %}
     </div>
