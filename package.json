@@ -1,6 +1,6 @@
 {
   "name": "ec-site-alert",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Create Site Wide Alerts for your Apostrophe CMS website",
   "main": "index.js",
   "directories": {
