@@ -4,7 +4,7 @@ module.exports = {
 	label: 'Site Alert',        
 	pluralLabel: 'Site Alerts',
 	moogBundle: {
-    	modules: ['apostrophe-global','ec-site-alert-widgets'],
+    	modules: ['ec-site-alert-global','ec-site-alert-widgets'],
     	directory: 'lib/modules'
   	},        
     beforeConstruct: function(self, options) {
