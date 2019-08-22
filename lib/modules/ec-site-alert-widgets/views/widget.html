@@ -23,9 +23,9 @@
       {% endif %}
              	
       {% if data.global.alertTitle | length > 1 %}
-       <strong>{{data.global.alertTitle}}</strong> - {{ data.global.alertDescription | truncate(150)}}
+       <strong>{{data.global.alertTitle}}</strong> <span class=".d-sm-none .d-md-block"> - {{ data.global.alertDescription | truncate(150)}}</span>
        {% else%}
-       	<strong>{{ data.global._alerts[0].title}}</strong> - {{ data.global._alerts[0].alertContent}}
+       	<strong>{{ data.global._alerts[0].title}}</strong> <span class=".d-sm-none .d-md-block">- {{ data.global._alerts[0].alertContent}}</span>
        {% endif %}
       
       
