@@ -21,8 +21,9 @@
 
 
 
-{{ data.global._alerts.unshift({title: data.global.alertTitle, alertContent: data.global.alertDescription})}}
+
 {% if data.global.alertDisplay %}
+{% data.global._alerts.unshift({title: data.global.alertTitle, alertContent: data.global.alertDescription}) %}
     <div class="alert info-alert" role="alert" data-bgcolor="{{selectedAlertLevel.alertBgColor}}">
     <div class="alert-container container">
             <button id="alertButton" type="button" class="close" data-toggle="collapse" aria-expanded="false" href="#collapseExample"  aria-label="Close" aria-controls="collapseExample">
